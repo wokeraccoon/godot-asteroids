@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 50 #player speed
+export var speed = 100 #player speed
 export var max_speed = 100 #max player speed
 export var rotation_speed = 4 #speed that the player can rotate in degrees (i think?)
 
@@ -33,8 +33,10 @@ func get_input():
 		
 		#adds 10 units to the acceleration of the player, then rotates the vector so the player moves to the angle its looking at.
 		velocity += Vector2(speed, 0).rotated(rotation)
-		#then clamps the velocity to the max speed so the player doesnt accelerate indefinitely
-		velocity = velocity.clamped(max_speed)
+	if Input.is_action_pressed("deaccelerate"):
+		velocity -= Vector2(speed, 0).rotated(rotation)
+	
+	velocity = velocity.clamped(max_speed)
 	
 	#pew pew!
 	if Input.is_action_just_pressed("shoot"):
@@ -65,7 +67,7 @@ func shoot():
 
 func _physics_process(delta):
 	get_input()
-	
+	print(velocity)
 	#rotates player
 	rotation += rotation_dir * rotation_speed * delta
 	#moves the player
