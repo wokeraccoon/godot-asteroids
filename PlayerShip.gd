@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-export var speed = 10 #player speed
-export var max_speed = 150 #max player speed
-export var rotation_speed = 3 #speed that the player can rotate in degrees (i think?)
+export var speed = 50 #player speed
+export var max_speed = 100 #max player speed
+export var rotation_speed = 4 #speed that the player can rotate in degrees (i think?)
 
 export (PackedScene) var Bullet #saves bullet scene for later instancing it
 

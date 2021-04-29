@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Asteroid.gd" type="Script" id=1]
-[ext_resource path="res://Assets/meteor_squareDetailedLarge.png" type="Texture" id=2]
+[ext_resource path="res://Assets/meteor_detailedLarge.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 27.1851
 
 [node name="Asteroid" type="Area2D"]
+collision_layer = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -18,3 +19,5 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_Asteroid_area_entered"]
