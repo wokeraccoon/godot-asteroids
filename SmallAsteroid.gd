@@ -1,7 +1,5 @@
 extends Area2D
 
-export (PackedScene) var small_asteroid
-
 var random_rotation_speed
 var speed
 var screen_size
@@ -10,14 +8,9 @@ var random_scale
 var random = RandomNumberGenerator.new()
 	
 func _ready():
-	
 	screen_size = get_viewport_rect().size
 	random_rotation_speed = rand_range(-1,1)*5
-	rotation_degrees = rand_range(0,359)
-	speed = rand_range(1,2) * 50
-	
-	random_scale =  rand_range(1.5,2)
-	scale = Vector2(random_scale,random_scale)
+	speed = rand_range(2,3) * 50
 
 func _process(delta):
 	$Sprite.rotation += random_rotation_speed * delta
@@ -35,21 +28,9 @@ func warp_object():
 	if position.y <= -15:
 		position.y = screen_size.y
 
-func generate_small_asteroid():
-	for i in (2):
-		var sast = small_asteroid.instance()
-		get_parent().add_child(sast)
-		sast.transform = global_transform
-		if i == 0:
-			sast.rotation_degrees = rotation_degrees + 90
-		else:
-			sast.rotation_degrees = rotation_degrees + 270
-	pass
-
-func _on_BigAsteroid_area_entered(area):
-	generate_small_asteroid()
+func _on_SmallAsteroid_area_entered(area):
 	queue_free()
-
-func _on_BigAsteroid_body_entered(body):
+	
+func _on_SmallAsteroid_body_entered(body):
 	body.on_collision()
 	queue_free()

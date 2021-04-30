@@ -13,8 +13,16 @@ func _ready():
 func generate_asteroid():
 	var ast = asteroid.instance()
 	add_child(ast)
-	ast.position =  Vector2(random.randf_range(0,screen_size.x), random.randf_range(0,screen_size.y))
+	
+	var random_y = randi() % 10
+	
+	if random_y < 5:
+		ast.position =  Vector2(random.randf_range(0,screen_size.x), -15)
+	else:
+		ast.position =  Vector2(random.randf_range(0,screen_size.x), screen_size.y+15)
 
 
 func _on_Timer_timeout():
-	generate_asteroid()
+	var asteroid_count = get_tree().get_nodes_in_group("asteroids").size()
+	if asteroid_count <= 4:
+		generate_asteroid()

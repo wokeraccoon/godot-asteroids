@@ -1,14 +1,13 @@
 extends KinematicBody2D
 
+export (PackedScene) var Bullet #saves bullet scene for later instancing it
+
 export var speed = 100 #player speed
 export var max_speed = 100 #max player speed
 export var rotation_speed = 4 #speed that the player can rotate in degrees (i think?)
 
-export (PackedScene) var Bullet #saves bullet scene for later instancing it
-
 var velocity = Vector2()
 var rotation_dir = 0 #for determining what direction the player is turning
-
 var screen_size #for storing the viewport's size
 
 func _ready():
@@ -34,7 +33,7 @@ func get_input():
 		#adds 10 units to the acceleration of the player, then rotates the vector so the player moves to the angle its looking at.
 		velocity += Vector2(speed, 0).rotated(rotation)
 	if Input.is_action_pressed("deaccelerate"):
-		velocity -= Vector2(speed, 0).rotated(rotation)
+		velocity -= velocity/20
 	
 	velocity = velocity.clamped(max_speed)
 	
@@ -61,16 +60,18 @@ func shoot():
 	var b =  Bullet.instance()
 	#adds a bullet as a child of the root node of the scene
 	#This is so the bullet can move on its own, rather than inherithing the player's transform
-	owner.add_child(b)
+	get_parent().add_child(b)
 	#sets the spawn point of the bullet to the player's "gun"
 	b.transform = $Gun.global_transform
 
 func _physics_process(delta):
 	get_input()
-	print(velocity)
 	#rotates player
 	rotation += rotation_dir * rotation_speed * delta
 	#moves the player
 	velocity = move_and_slide(velocity)
 	
 	warp_object()
+	
+func on_collision():
+	get_tree().reload_current_scene()
