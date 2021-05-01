@@ -4,8 +4,6 @@ var random_rotation_speed
 var speed
 var screen_size
 var random_scale
-
-var random = RandomNumberGenerator.new()
 	
 func _ready():
 	screen_size = get_viewport_rect().size

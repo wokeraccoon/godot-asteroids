@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/ship_E.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 1 )
+
+[node name="UI" type="CanvasLayer"]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 1024.0
+margin_bottom = 64.0
+alignment = 1
+
+[node name="Score" type="Label" parent="MarginContainer/HBoxContainer2"]
+margin_left = 316.0
+margin_top = 18.0
+margin_right = 503.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "Score: 0000000000"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
+margin_left = 507.0
+margin_right = 707.0
+margin_bottom = 64.0
+
+[node name="LiveIndicator" type="TextureRect" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+
+[node name="LiveIndicator2" type="TextureRect" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+
+[node name="LiveIndicator3" type="TextureRect" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
